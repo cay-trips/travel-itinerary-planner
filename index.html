@@ -4,10 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="HTzjSTDKxpw_cvaONzbn7K_Ed86ptSnKrnf1rFVAv_w" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230E1F2B' stroke='%23E3A008' stroke-width='4'/%3E%3Cpath d='M50 18 L58 50 L50 82 L42 50 Z' fill='%23E3A008'/%3E%3Cpath d='M18 50 L50 42 L82 50 L50 58 Z' fill='%232F6F62'/%3E%3Ccircle cx='50' cy='50' r='5' fill='%23F7F3EA'/%3E%3C/svg%3E">
 <title>CAY Trips — Plan, Budget & Book Your Trip in One Place</title>
 <meta name="description" content="CAY Trips is a free travel planner: get AI-scored destination picks for your budget, split group costs automatically, check real weather for any city on Earth, and book with real airlines & hotels — all in one place.">
 <meta name="keywords" content="travel planner, trip budget calculator, split trip cost, destination recommendation, travel itinerary app, free trip planner">
 <link rel="canonical" href="https://cay-trips.vercel.app/">
+
+<!-- Google Analytics — replace G-XXXXXXXXXX with your real Measurement ID from analytics.google.com -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
 
 <!-- Open Graph (Facebook, LinkedIn, WhatsApp previews) -->
 <meta property="og:type" content="website">
@@ -46,6 +56,19 @@
     --font-display:'Fraunces', serif;
     --font-body:'Inter', sans-serif;
     --font-mono:'IBM Plex Mono', monospace;
+    /* theme-aware text colors for content sitting directly on the shell background */
+    --shell-text-primary: var(--paper);
+    --shell-text-secondary: rgba(247,243,234,0.65);
+    --shell-text-tertiary: rgba(247,243,234,0.5);
+    --shell-border: rgba(247,243,234,0.12);
+  }
+  body[data-theme="light"]{
+    --bg-dark:#EDEAE3;
+    --bg-dark-2:#E1DCCE;
+    --shell-text-primary: var(--ink);
+    --shell-text-secondary: rgba(22,36,44,0.65);
+    --shell-text-tertiary: rgba(22,36,44,0.5);
+    --shell-border: rgba(22,36,44,0.12);
   }
   *,*::before,*::after{ box-sizing:border-box; }
   html,body{ margin:0; padding:0; }
@@ -118,7 +141,7 @@
   /* ---------- topbar (departure-board style) ---------- */
   .topbar{
     background: var(--bg-dark-2);
-    border-bottom: 1px solid rgba(247,243,234,0.12);
+    border-bottom: 1px solid var(--shell-border);
     color: var(--paper);
   }
   .topbar__inner{
@@ -135,10 +158,10 @@
   .brand__name{
     font-family: var(--font-display); font-weight:600; font-size:20px; color:var(--paper);
   }
-  .topbar__meta{ display:flex; align-items:center; gap:18px; font-family:var(--font-mono); font-size:12.5px; color:rgba(247,243,234,0.7); }
+  .topbar__meta{ display:flex; align-items:center; gap:18px; font-family:var(--font-mono); font-size:12.5px; color:var(--shell-text-secondary); }
   .topbar__user{ color:var(--gold-soft); }
   .btn-logout{
-    background:transparent; border:1px solid rgba(247,243,234,0.3); color:var(--paper);
+    background:transparent; border:1px solid var(--shell-border); color:var(--shell-text-primary);
     padding:7px 14px; border-radius:100px; font-size:13px; letter-spacing:0.02em;
     transition: border-color .15s ease, background .15s ease;
   }
@@ -151,8 +174,9 @@
   }
   h1,h2,h3{ font-family: var(--font-display); margin:0; color: var(--paper); }
   .page-head{ padding: 40px 0 28px; position:relative; }
+  .page-head h1{ color: var(--shell-text-primary); }
   .page-head h1{ font-size: 34px; font-weight:700; }
-  .page-head p{ color: rgba(247,243,234,0.65); max-width:560px; margin-top:10px; line-height:1.5; }
+  .page-head p{ color: var(--shell-text-secondary); max-width:560px; margin-top:10px; line-height:1.5; }
   .page-head::after{
     content:'';
     position:absolute; top:6px; right:0; width:190px; height:130px;
@@ -302,16 +326,16 @@
   @media (max-width:600px){ .hero-flight{ display:none; } }
   .stats-strip{
     display:flex; flex-wrap:wrap; gap:0; margin: 18px 0 30px;
-    background: var(--bg-dark-2); border:1px solid rgba(247,243,234,0.1); border-radius:14px;
+    background: var(--bg-dark-2); border:1px solid var(--shell-border); border-radius:14px;
     overflow:hidden;
   }
   .stats-strip__item{
     flex:1; min-width:140px; padding:16px 18px; text-align:center;
-    border-right:1px solid rgba(247,243,234,0.08);
+    border-right:1px solid var(--shell-border);
   }
   .stats-strip__item:last-child{ border-right:none; }
   .stats-strip__num{ font-family:var(--font-mono); font-size:24px; font-weight:700; color:var(--gold-soft); display:block; }
-  .stats-strip__label{ font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:rgba(247,243,234,0.55); margin-top:4px; display:block; }
+  .stats-strip__label{ font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--shell-text-tertiary); margin-top:4px; display:block; }
 
   .trip-list{ display:flex; flex-direction:column; gap:16px; }
   .trip-card{ cursor:pointer; will-change: transform; transition: box-shadow .15s ease; }
@@ -335,7 +359,7 @@
   .trip-stats{ display:flex; gap:22px; font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft); }
   .trip-stats b{ color: var(--ink); font-size:14px; display:block; font-family:var(--font-body); }
 
-  .breadcrumb{ font-family:var(--font-mono); font-size:12.5px; color: rgba(247,243,234,0.6); margin-bottom:6px; }
+  .breadcrumb{ font-family:var(--font-mono); font-size:12.5px; color: var(--shell-text-tertiary); margin-bottom:6px; }
   .breadcrumb button{ background:none; border:none; color: var(--gold-soft); font-family:inherit; font-size:inherit; padding:0; }
   .breadcrumb button:hover{ text-decoration:underline; }
 
@@ -421,7 +445,13 @@
   .tab-btn{ flex:1; padding:9px; border-radius:100px; border:none; background:transparent; font-weight:600; font-size:13.5px; color:var(--ink-soft); }
   .tab-btn.active{ background:#fff; color:var(--ink); box-shadow:0 2px 6px rgba(0,0,0,0.08); }
 
-  .footer-note{ text-align:center; padding:22px; font-family:var(--font-mono); font-size:11.5px; color:rgba(247,243,234,0.4); }
+  .site-footer{ border-top: 1px solid var(--shell-border); margin-top: 40px; padding: 28px 24px 24px; }
+  .site-footer__inner{ max-width:1080px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px; }
+  .site-footer__brand{ font-family:var(--font-display); font-weight:600; font-size:15px; color:var(--shell-text-primary); }
+  .site-footer__links{ display:flex; flex-wrap:wrap; gap:18px; }
+  .site-footer__links button{ background:none; border:none; padding:0; cursor:pointer; font-family:var(--font-body); font-size:13px; color:var(--shell-text-secondary); }
+  .site-footer__links button:hover{ color:var(--gold-soft); text-decoration:underline; }
+  .site-footer__copy{ width:100%; text-align:center; font-family:var(--font-mono); font-size:11px; color:var(--shell-text-tertiary); margin-top:14px; }
 
   .empty-state{ text-align:center; padding: 30px 20px; color: var(--ink-soft); }
   .empty-state__title{ font-family:var(--font-display); font-size:17px; color:var(--ink); margin-bottom:6px; }
@@ -496,6 +526,16 @@ const state = {
   globalBookingFormOpen: false,
   content: {},
   logoUploading: false,
+  theme: 'dark',
+  myBookingsList: [],
+  favoritesList: [],
+  quizStep: 0,
+  quizAnswers: {},
+  quizResult: null,
+  editingExpenseId: null,
+  editingTransportId: null,
+  editingDestinationId: null,
+  sharedTripView: null,
   authMessage: null,
   formError: null,
   editingDestId: null,
@@ -543,6 +583,46 @@ function scoreDestination(dest, {budget, duration, travelers, month}){
 }
 function getTrip(id){ return state.trips.find(t => t.id === id); }
 
+function daysUntilLabel(dateStr){
+  const target = new Date(dateStr + 'T00:00:00');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const diff = Math.round((target - today) / 86400000);
+  if(diff > 1) return `${diff} days to go`;
+  if(diff === 1) return 'Tomorrow!';
+  if(diff === 0) return 'Today!';
+  if(diff < 0) return 'Trip has passed';
+  return '';
+}
+
+function generatePackingList(trip){
+  const days = Math.max(1, Math.round((new Date(trip.end_date) - new Date(trip.start_date)) / 86400000) + 1);
+  const list = [
+    { category: 'Documents', items: ['ID proof / passport', 'Travel tickets & booking confirmations', 'Emergency contact list', 'Some cash + one backup card'] },
+    { category: 'Clothing', items: [`${days} sets of daywear`, `${Math.ceil(days/2)} pairs of socks & undergarments (packed extra)`, 'One warm layer (evenings can get cool anywhere)', 'Comfortable walking shoes'] },
+    { category: 'Essentials', items: ['Phone charger & power bank', 'Basic first-aid & any personal medication', 'Toiletries (travel-sized)', 'Reusable water bottle'] },
+    { category: 'Nice to Have', items: ['Camera or spare phone storage', 'A book or offline entertainment', 'Small daypack for day trips'] }
+  ];
+  return { days, list };
+}
+
+function groupTripByDate(trip){
+  const byDate = {};
+  (trip.transport || []).forEach(t => {
+    if(!byDate[t.travel_date]) byDate[t.travel_date] = { transport: [], expenses: [] };
+    byDate[t.travel_date].transport.push(t);
+  });
+  (trip.expenses || []).forEach(e => {
+    if(!byDate[e.expense_date]) byDate[e.expense_date] = { transport: [], expenses: [] };
+    byDate[e.expense_date].expenses.push(e);
+  });
+  const dates = Object.keys(byDate).sort();
+  return dates.map(date => ({ date, ...byDate[date] }));
+}
+
+function randomShareToken(){
+  return 'trip-' + Math.random().toString(36).slice(2, 10) + Math.random().toString(36).slice(2, 6);
+}
+
 /* =========================================================
    SITE CONTENT (CMS) — every headline/subtext below is editable
    from Admin → Site Text & Branding, with these as fallback defaults.
@@ -573,7 +653,19 @@ const CONTENT_FIELDS = [
   { group: 'Recommend Page', key: 'recommend.subtext', label: 'Subtext (use {count} for the destination count)', fallback: 'Scored against {count} destinations stored in the database — on budget fit and seasonal fit. No internet lookup involved.', type:'textarea' },
   { group: 'Explore Page', key: 'explore.headline', label: 'Headline', fallback: 'Explore Any Destination', type:'text' },
   { group: 'Explore Page', key: 'explore.subtext', label: 'Subtext', fallback: 'Search any city on Earth. Real weather via Open-Meteo, real booking links via Google Flights & Booking.com — no fixed cost database behind this, so no budget-fit score here, just honest real-time info.', type:'textarea' },
-  { group: 'Footer', key: 'footer.note', label: 'Footer Note', fallback: 'Travel Itinerary Planner — backed by Supabase · your data really persists', type:'text' }
+  { group: 'Footer', key: 'footer.note', label: 'Footer Note', fallback: 'Travel Itinerary Planner — backed by Supabase · your data really persists', type:'text' },
+  { group: 'About Page', key: 'about.body', label: 'Body Text', fallback: 'CAY Trips is a free travel planning and budgeting tool built to solve a real problem: group trips are easy to dream up and hard to actually settle up afterward.', type:'textarea' },
+  { group: 'Contact Page', key: 'contact.body', label: 'Body Text', fallback: 'Have feedback, found a bug, or just want to say hello? We would love to hear from you, reach out via the contact details linked from our GitHub or LinkedIn listing for this project.', type:'textarea' },
+  { group: 'Founders Page', key: 'founders.intro', label: 'Intro Text', fallback: 'The team behind CAY Trips.', type:'text' },
+  { group: 'Founders Page', key: 'founder1.name', label: 'Founder 1: Name', fallback: 'Founder 1', type:'text' },
+  { group: 'Founders Page', key: 'founder1.role', label: 'Founder 1: Role', fallback: 'Co-Founder', type:'text' },
+  { group: 'Founders Page', key: 'founder1.bio', label: 'Founder 1: Bio', fallback: 'Bio coming soon.', type:'textarea' },
+  { group: 'Founders Page', key: 'founder2.name', label: 'Founder 2: Name', fallback: 'Founder 2', type:'text' },
+  { group: 'Founders Page', key: 'founder2.role', label: 'Founder 2: Role', fallback: 'Co-Founder', type:'text' },
+  { group: 'Founders Page', key: 'founder2.bio', label: 'Founder 2: Bio', fallback: 'Bio coming soon.', type:'textarea' },
+  { group: 'Founders Page', key: 'founder3.name', label: 'Founder 3: Name', fallback: 'Founder 3', type:'text' },
+  { group: 'Founders Page', key: 'founder3.role', label: 'Founder 3: Role', fallback: 'Co-Founder', type:'text' },
+  { group: 'Founders Page', key: 'founder3.bio', label: 'Founder 3: Bio', fallback: 'Bio coming soon.', type:'textarea' }
 ];
 
 async function loadSiteContent(){
@@ -590,21 +682,56 @@ async function loadSiteContent(){
 /* =========================================================
    NAVIGATION + DATA LOADING
    ========================================================= */
-async function go(screen){
+/* =========================================================
+   BROWSER HISTORY — makes the back/forward buttons move between
+   screens inside the app instead of leaving the site entirely.
+   ========================================================= */
+let historyStarted = false;
+function recordHistory(historyState, hash){
+  if(!historyStarted){
+    // The very first screen replaces the current (blank) entry, so
+    // pressing back while on it still correctly leaves the site —
+    // that part of browser behavior is supposed to work that way.
+    history.replaceState(historyState, '', '#' + hash);
+    historyStarted = true;
+  } else {
+    history.pushState(historyState, '', '#' + hash);
+  }
+}
+window.addEventListener('popstate', (event) => {
+  const s = event.state;
+  if(!s){
+    go(state.user ? 'menu' : 'login', { fromHistory: true });
+    return;
+  }
+  if(s.screen === 'tripDetail' && s.tripId){
+    openTrip(s.tripId, { fromHistory: true });
+  } else {
+    go(s.screen, { fromHistory: true });
+  }
+});
+
+async function go(screen, opts = {}){
   state.screen = screen;
   state.formError = null;
+  if(screen === 'quiz'){ state.quizStep = 0; state.quizAnswers = {}; state.quizResult = null; }
+  if(!opts.fromHistory) recordHistory({ screen }, screen);
   renderApp();
   try{
-    if(screen === 'trips') await loadTrips();
-    if(screen === 'recommend' || screen === 'admin') await loadDestinations();
+    if(screen === 'trips' || screen === 'menu') await loadTrips();
+    if(screen === 'recommend' || screen === 'admin' || screen === 'quiz') await loadDestinations();
+    if(screen === 'recommend') await loadFavorites();
+    if(screen === 'myBookings') await loadMyBookings();
+    if(screen === 'favorites') await loadFavorites();
   }catch(err){ state.formError = err.message; }
   renderApp();
 }
 
-async function openTrip(id){
+async function openTrip(id, opts = {}){
   state.screen = 'tripDetail';
   state.currentTrip = null;
   state.formError = null;
+  if(!opts.fromHistory) recordHistory({ screen: 'tripDetail', tripId: id }, 'trip-' + id);
   renderApp();
   try{
     const { data, error } = await sb.from('trips')
@@ -637,9 +764,18 @@ async function loadDestinations(){
 async function initAuth(){
   if(CONFIG_MISSING){ renderApp(); return; }
   await loadSiteContent();
+
+  sb.auth.onAuthStateChange((event) => {
+    if(event === 'PASSWORD_RECOVERY'){
+      state.screen = 'resetPassword';
+      state.authMessage = null;
+      renderApp();
+    }
+  });
+
   const { data: { session } } = await sb.auth.getSession();
   if(session){ await afterLogin(session.user); }
-  else{ renderApp(); }
+  else{ recordHistory({ screen: 'login' }, 'login'); renderApp(); }
 }
 
 async function afterLogin(user){
@@ -679,8 +815,73 @@ async function handleAuth(e){
 
 async function logout(){
   await sb.auth.signOut();
-  state.user = null; state.profile = null; state.screen = 'login'; state.authMode = 'login';
+  state.user = null; state.profile = null; state.authMode = 'login';
+  await go('login');
+}
+
+/* =========================================================
+   RENDER: FORGOT PASSWORD / RESET PASSWORD
+   ========================================================= */
+function renderForgotPassword(){
+  return `
+  <div class="center-shell">
+    <div class="panel" style="max-width:440px;">
+      <div class="eyebrow">Forgot Password</div>
+      <h2 style="color:var(--ink); margin-bottom:14px;">Reset your password</h2>
+      <p style="color:var(--ink-soft); font-size:14.5px; margin-bottom:18px;">Enter your account email and we'll send you a link to set a new password.</p>
+      ${state.authMessage ? `<div class="banner" style="background:var(--teal-soft); color:#1d453c; margin-bottom:16px;">${state.authMessage}</div>` : ''}
+      <form onsubmit="return handleForgotPassword(event)">
+        <div class="field"><label>Email</label><input type="email" name="email" required></div>
+        <button type="submit" class="btn btn--primary btn--block">Send Reset Link</button>
+      </form>
+      <p class="hint" style="margin-top:14px;"><button type="button" class="link-btn" onclick="go('login')">Back to login</button></p>
+    </div>
+  </div>`;
+}
+async function handleForgotPassword(e){
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const email = fd.get('email');
+  try{
+    const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin });
+    if(error) throw error;
+    state.authMessage = "If an account exists for that email, a reset link is on its way — check your inbox.";
+  }catch(err){
+    state.authMessage = err.message;
+  }
   renderApp();
+  return false;
+}
+
+function renderResetPassword(){
+  return `
+  <div class="center-shell">
+    <div class="panel" style="max-width:440px;">
+      <div class="eyebrow">Set New Password</div>
+      <h2 style="color:var(--ink); margin-bottom:14px;">Choose a new password</h2>
+      ${state.authMessage ? `<div class="banner banner--error" style="margin-bottom:16px;">${state.authMessage}</div>` : ''}
+      <form onsubmit="return handleResetPassword(event)">
+        <div class="field"><label>New Password</label><input type="password" name="password" minlength="6" required></div>
+        <button type="submit" class="btn btn--primary btn--block">Update Password</button>
+      </form>
+    </div>
+  </div>`;
+}
+async function handleResetPassword(e){
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const password = fd.get('password');
+  try{
+    const { error } = await sb.auth.updateUser({ password });
+    if(error) throw error;
+    alert("Password updated! Please log in with your new password.");
+    await sb.auth.signOut();
+    state.user = null; state.profile = null; state.screen = 'login'; state.authMode = 'login'; state.authMessage = null;
+  }catch(err){
+    state.authMessage = err.message;
+  }
+  renderApp();
+  return false;
 }
 
 /* =========================================================
@@ -697,6 +898,7 @@ function topbar(){
         <span class="brand__name">${ct('brand.name', 'Travel Itinerary Planner')}</span>
       </div>
       <div class="topbar__meta">
+        <button class="btn-logout" onclick="toggleTheme()" title="Toggle light/dark mode">${state.theme === 'light' ? '🌙' : '☀️'}</button>
         <span>Logged in as <span class="topbar__user">${state.profile?.full_name || state.user.email}</span>${state.profile?.is_admin ? ' · <span class="topbar__user">Admin</span>' : ''}</span>
         <button class="btn-logout" onclick="logout()">Log out</button>
       </div>
@@ -771,6 +973,7 @@ function renderLogin(){
           </div>
           <button type="submit" class="btn btn--primary btn--block">${state.authMode==='register' ? 'Create account' : 'Log in'}</button>
           <p class="hint">Real accounts, real database — this is the live Supabase-backed version.</p>
+          ${state.authMode === 'login' ? `<p class="hint"><button type="button" class="link-btn" onclick="go('forgotPassword')">Forgot password?</button></p>` : ''}
         </form>
       </div>
       </div>
@@ -786,7 +989,10 @@ const TILE_ICONS = {
   recommend: `<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/><path d="M12 4v2.4M12 17.6V20M4 12h2.4M17.6 12H20"/>`,
   explore: `<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.8 5.2 3.8 8.5s-1.3 6.2-3.8 8.5c-2.5-2.3-3.8-5.2-3.8-8.5S9.5 5.8 12 3.5z"/>`,
   admin: `<path d="M4 6l8-3 8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4.5"/>`,
-  adminContent: `<path d="M4 19.5V17l10-10 2.5 2.5-10 10H4z"/><path d="M14.5 6.5l2.5-2.5L19.5 6.5 17 9z"/>`
+  adminContent: `<path d="M4 19.5V17l10-10 2.5 2.5-10 10H4z"/><path d="M14.5 6.5l2.5-2.5L19.5 6.5 17 9z"/>`,
+  bookings: `<path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8z"/><path d="M9 6.5v11" stroke-dasharray="2.2 2.2"/>`,
+  favorites: `<path d="M12 19c-4-2.8-8-6-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 4-4 7.2-8 10z"/>`,
+  quiz: `<path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/>`
 };
 
 function renderMenu(){
@@ -798,6 +1004,9 @@ function renderMenu(){
     tiles.push({ screen:'admin', accent:'slate', icon:'admin', title:ct('menu.tile_admin_title','Admin: Manage Destinations'), desc:ct('menu.tile_admin_desc','Add, edit, or remove entries in the shared destination guide.') });
   }
   tiles.push({ screen:'exploreGlobal', accent:'sky', icon:'explore', title:ct('menu.tile_explore_title','Explore Any Destination'), desc:ct('menu.tile_explore_desc','Search literally any city worldwide — real weather, real booking links.') });
+  tiles.push({ screen:'myBookings', accent:'teal', icon:'bookings', title:'My Bookings', desc:'See every trip you have booked and its invoice.' });
+  tiles.push({ screen:'favorites', accent:'gold', icon:'favorites', title:'Favorite Destinations', desc:'Destinations you have saved for later.' });
+  tiles.push({ screen:'quiz', accent:'sky', icon:'quiz', title:'Trip Inspiration Quiz', desc:'Answer 3 quick questions, get one destination pick.' });
   if(state.profile?.is_admin){
     tiles.push({ screen:'adminContent', accent:'slate', icon:'adminContent', title:'Site Text & Branding', desc:'Edit any headline, description, or the logo shown across the app.' });
   }
@@ -875,6 +1084,7 @@ function renderTrips(){
             <div>
               <h3>${trip.title}</h3>
               <div class="route">${trip.start_date} → ${trip.end_date} · ${trip.travelers} traveler${trip.travelers>1?'s':''}</div>
+              ${daysUntilLabel(trip.start_date) ? `<div class="hint" style="color:var(--gold); font-weight:600; margin-top:4px;">${daysUntilLabel(trip.start_date)}</div>` : ''}
             </div>
             <div class="trip-stats">
               <div><b>${fmt(trip.budget)}</b>Budget</div>
@@ -933,13 +1143,29 @@ function renderTripDetail(){
   }
   const trip = state.currentTrip;
   const bs = budgetStatus(trip);
+  const countdown = daysUntilLabel(trip.start_date);
+  const packing = generatePackingList(trip);
+  const dayGroups = groupTripByDate(trip);
+
+  // Spending breakdown by category — simple bar chart, no chart library needed
+  const categoryTotals = {};
+  (trip.expenses || []).forEach(e => {
+    categoryTotals[e.category] = (categoryTotals[e.category] || 0) + Number(e.amount);
+  });
+  const totalSpent = bs.spent || 1;
+  const categoryRows = Object.keys(categoryTotals).map(cat => ({
+    cat, amount: categoryTotals[cat], pct: Math.round((categoryTotals[cat] / totalSpent) * 100)
+  })).sort((a,b) => b.amount - a.amount);
+
+  const shareUrl = trip.share_token ? `${window.location.origin}${window.location.pathname}?share=${trip.share_token}` : '';
+
   return `
   ${topbar()}
   <div class="shell">
     <div class="page-head">
       <div class="breadcrumb"><button onclick="go('menu')">Main Menu</button> / <button onclick="go('trips')">Trips</button> / ${trip.title}</div>
       <h1>${trip.title}</h1>
-      <p>${trip.start_date} → ${trip.end_date} · ${trip.travelers} travelers · Budget ${fmt(trip.budget)}</p>
+      <p>${trip.start_date} → ${trip.end_date} · ${trip.travelers} travelers · Budget ${fmt(trip.budget)}${countdown ? ` · <strong style="color:var(--gold-soft)">${countdown}</strong>` : ''}</p>
     </div>
     ${errorBanner()}
 
@@ -962,22 +1188,127 @@ function renderTripDetail(){
               <div>${e.description || e.category}</div>
               <div class="list-row__meta">${e.category} · paid by ${e.paid_by} · ${e.expense_date}</div>
             </div>
-            <div class="amount">${fmt(e.amount)}</div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="amount">${fmt(e.amount)}</div>
+              <button class="icon-btn icon-btn--danger" onclick="deleteExpense(${e.id})" title="Delete">✕</button>
+            </div>
           </div>`).join('') : `<div class="empty-state"><div class="empty-state__title">No expenses yet</div>Add the first one below.</div>`}
         <hr class="divider">
         <button class="btn btn--primary" onclick="go('addExpense')">+ Add Expense</button>
         <button class="btn btn--ghost" onclick="go('splitCost')" style="margin-left:10px;">Split Cost</button>
+
+        ${categoryRows.length ? `
+        <hr class="divider">
+        <div class="section-title">Spending by Category</div>
+        ${categoryRows.map(r => `
+          <div style="margin-bottom:10px;">
+            <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px;">
+              <span>${r.cat}</span><span class="amount">${fmt(r.amount)} (${r.pct}%)</span>
+            </div>
+            <div style="background:var(--paper-2); border-radius:6px; height:8px; overflow:hidden;">
+              <div style="background:var(--gold); height:100%; width:${r.pct}%;"></div>
+            </div>
+          </div>
+        `).join('')}` : ''}
       </div>
 
       <div class="panel">
         <div class="section-title">Destinations</div>
-        ${(trip.trip_destinations||[]).length ? trip.trip_destinations.map(d => `<div class="list-row"><div>${d.city}</div><div class="list-row__meta">${d.country}</div></div>`).join('') : `<div class="hint">No destinations added yet.</div>`}
+        ${(trip.trip_destinations||[]).length ? trip.trip_destinations.map(d => `
+          <div class="list-row">
+            <div><div>${d.city}</div><div class="list-row__meta">${d.country}</div></div>
+            <button class="icon-btn icon-btn--danger" onclick="deleteDestination(${d.id})" title="Delete">✕</button>
+          </div>`).join('') : `<div class="hint">No destinations added yet.</div>`}
         <hr class="divider">
         <div class="section-title">Transport</div>
-        ${(trip.transport||[]).length ? trip.transport.map(t => `<div class="list-row"><div>${t.mode}: ${t.from_place} → ${t.to_place}<div class="list-row__meta">${t.travel_date} · Ref ${t.booking_ref||'—'}</div></div><div class="amount">${fmt(t.cost)}</div></div>`).join('') : `<div class="hint">No transport booked yet.</div>`}
+        ${(trip.transport||[]).length ? trip.transport.map(t => `
+          <div class="list-row">
+            <div>${t.mode}: ${t.from_place} → ${t.to_place}<div class="list-row__meta">${t.travel_date} · Ref ${t.booking_ref||'—'}</div></div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="amount">${fmt(t.cost)}</div>
+              <button class="icon-btn icon-btn--danger" onclick="deleteTransport(${t.id})" title="Delete">✕</button>
+            </div>
+          </div>`).join('') : `<div class="hint">No transport booked yet.</div>`}
+
+        <hr class="divider">
+        <div class="section-title">Share This Trip</div>
+        ${trip.is_public ? `
+          <p class="hint">Anyone with this link can view your itinerary (not your expenses):</p>
+          <input readonly value="${shareUrl}" style="width:100%; padding:9px 11px; border-radius:8px; border:1.5px solid var(--line); font-family:var(--font-mono); font-size:12.5px; margin:8px 0;" onclick="this.select()">
+          <button class="btn btn--ghost btn--sm" onclick="makeTripPrivate(${trip.id})">Make Private</button>
+        ` : `
+          <p class="hint">Make this trip public to get a shareable link (destinations & transport only, not your expenses).</p>
+          <button class="btn btn--dark btn--sm" style="margin-top:8px;" onclick="makeTripPublic(${trip.id})">Get Shareable Link</button>
+        `}
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="grid-2">
+      <div class="panel">
+        <div class="section-title">Day-by-Day</div>
+        ${dayGroups.length === 0 ? `<div class="hint">Add transport or expenses with dates to see a day-by-day view.</div>` : dayGroups.map(g => `
+          <div style="margin-bottom:14px;">
+            <div style="font-family:var(--font-mono); font-size:12.5px; font-weight:700; color:var(--teal); margin-bottom:6px;">${g.date}</div>
+            ${g.transport.map(t => `<div class="hint">🚄 ${t.mode}: ${t.from_place} → ${t.to_place}</div>`).join('')}
+            ${g.expenses.map(e => `<div class="hint">💰 ${e.category}${e.description ? ' — ' + e.description : ''} (${fmt(e.amount)})</div>`).join('')}
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="panel">
+        <div class="section-title">Packing List (${packing.days} day trip)</div>
+        ${packing.list.map(group => `
+          <div style="margin-bottom:12px;">
+            <div style="font-weight:600; font-size:13.5px; margin-bottom:4px;">${group.category}</div>
+            ${group.items.map(item => `<div class="hint">☐ ${item}</div>`).join('')}
+          </div>
+        `).join('')}
+        <p class="hint" style="margin-top:6px;"><em>A basic starting checklist — adjust for your destination's climate.</em></p>
       </div>
     </div>
   </div>`;
+}
+
+async function deleteDestination(id){
+  if(!confirm('Delete this destination?')) return;
+  try{
+    const { error } = await sb.from('trip_destinations').delete().eq('id', id);
+    if(error) throw error;
+    await openTrip(state.currentTrip.id);
+  }catch(err){ state.formError = err.message; renderApp(); }
+}
+async function deleteTransport(id){
+  if(!confirm('Delete this transport entry?')) return;
+  try{
+    const { error } = await sb.from('transport').delete().eq('id', id);
+    if(error) throw error;
+    await openTrip(state.currentTrip.id);
+  }catch(err){ state.formError = err.message; renderApp(); }
+}
+async function deleteExpense(id){
+  if(!confirm('Delete this expense?')) return;
+  try{
+    const { error } = await sb.from('expenses').delete().eq('id', id);
+    if(error) throw error;
+    await openTrip(state.currentTrip.id);
+  }catch(err){ state.formError = err.message; renderApp(); }
+}
+
+async function makeTripPublic(tripId){
+  const token = randomShareToken();
+  try{
+    const { error } = await sb.from('trips').update({ is_public: true, share_token: token }).eq('id', tripId);
+    if(error) throw error;
+    await openTrip(tripId);
+  }catch(err){ state.formError = err.message; renderApp(); }
+}
+async function makeTripPrivate(tripId){
+  try{
+    const { error } = await sb.from('trips').update({ is_public: false }).eq('id', tripId);
+    if(error) throw error;
+    await openTrip(tripId);
+  }catch(err){ state.formError = err.message; renderApp(); }
 }
 
 /* =========================================================
@@ -1029,6 +1360,26 @@ async function handleAddExpense(e){
     });
     if(error) throw error;
   }catch(err){ state.formError = err.message; renderApp(); return false; }
+
+  // Budget-alert email — only fires once per trip, the moment it first crosses over budget
+  try{
+    const { data: freshExpenses } = await sb.from('expenses').select('amount').eq('trip_id', trip.id);
+    const total = (freshExpenses || []).reduce((s, r) => s + Number(r.amount), 0);
+    if(total > trip.budget && !trip.budget_alert_sent){
+      await fetch('/api/send-notification-email', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          toEmail: state.user.email,
+          toName: state.profile?.full_name,
+          subject: `Budget Alert — ${trip.title} is over budget`,
+          message: `Hi ${state.profile?.full_name || 'there'},\n\nYour trip "${trip.title}" has gone over its planned budget.\n\nBudget: Rs. ${Number(trip.budget).toLocaleString('en-IN')}\nSpent so far: Rs. ${total.toLocaleString('en-IN')}\n\nLog in to CAY Trips to review your expenses.\n\n— CAY Trips`
+        })
+      });
+      await sb.from('trips').update({ budget_alert_sent: true }).eq('id', trip.id);
+    }
+  }catch(err){ /* budget alert email is a nice-to-have — never block the main flow if it fails */ }
+
   await openTrip(trip.id);
   return false;
 }
@@ -1130,7 +1481,10 @@ function renderRecommend(){
           <div class="perforation"></div>
           <div class="pass__main">
             <div>
-              <h3 style="color:var(--ink)">${r.name}</h3>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <h3 style="color:var(--ink)">${r.name}</h3>
+                <button onclick="toggleFavorite(${r.id})" title="${isFavorited(r.id) ? 'Remove from favorites' : 'Save to favorites'}" style="background:none; border:none; cursor:pointer; font-size:18px; line-height:1; padding:2px;">${isFavorited(r.id) ? '❤️' : '🤍'}</button>
+              </div>
               <div class="route">${r.attractions}</div>
               <div class="hint" style="margin-top:10px;">Est. cost ${fmt(r.estimatedCost)} · ${r.inSeason ? 'In season' : 'Off season'} · <em>${r.reason}</em></div>
               <div class="hint" id="weather-slot-${i}" style="margin-top:4px;">Loading weather…</div>
@@ -1642,9 +1996,26 @@ function renderAdminContent(){
       ${logoUrl ? `<img src="${logoUrl}" alt="Current logo" style="max-height:56px; width:auto; margin-bottom:14px; display:block; border-radius:6px;">` : `<p class="hint" style="margin-bottom:14px;">No custom logo uploaded yet — the topbar shows the text mark instead.</p>`}
       <input type="file" id="logo-upload-input" accept="image/*" style="display:block; margin-bottom:10px; font-size:13px;">
       <div style="display:flex; gap:10px;">
-        <button type="button" class="btn btn--dark btn--sm" onclick="handleLogoUpload()">${state.logoUploading ? 'Uploading…' : 'Upload Logo'}</button>
-        ${logoUrl ? `<button type="button" class="btn btn--ghost btn--sm" onclick="removeLogo()">Remove Logo</button>` : ''}
+        <button type="button" class="btn btn--dark btn--sm" onclick="handleImageUpload('logo-upload-input','brand.logo_url')">${state.logoUploading ? 'Uploading…' : 'Upload Logo'}</button>
+        ${logoUrl ? `<button type="button" class="btn btn--ghost btn--sm" onclick="removeImage('brand.logo_url')">Remove Logo</button>` : ''}
       </div>
+    </div>
+
+    <div class="section-title">Founder Photos</div>
+    <div class="tile-grid" style="margin-bottom:24px;">
+      ${[1,2,3].map(n => {
+        const photoUrl = ct(`founder${n}.photo_url`, '');
+        return `
+        <div class="panel panel--taped">
+          <div class="hint" style="font-weight:600; margin-bottom:10px;">Founder ${n}: ${ct(`founder${n}.name`, 'Founder ' + n)}</div>
+          ${photoUrl ? `<img src="${photoUrl}" alt="Founder ${n}" style="width:80px; height:80px; object-fit:cover; border-radius:50%; margin-bottom:12px; display:block;">` : `<p class="hint" style="margin-bottom:12px;">No photo uploaded yet.</p>`}
+          <input type="file" id="founder${n}-upload-input" accept="image/*" style="display:block; margin-bottom:10px; font-size:12.5px;">
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn btn--dark btn--sm" onclick="handleImageUpload('founder${n}-upload-input','founder${n}.photo_url')">Upload</button>
+            ${photoUrl ? `<button type="button" class="btn btn--ghost btn--sm" onclick="removeImage('founder${n}.photo_url')">Remove</button>` : ''}
+          </div>
+        </div>`;
+      }).join('')}
     </div>
 
     <form onsubmit="return handleSaveContent(event)">
@@ -1680,19 +2051,20 @@ async function handleSaveContent(e){
   return false;
 }
 
-async function handleLogoUpload(){
-  const input = document.getElementById('logo-upload-input');
+async function handleImageUpload(inputId, contentKey){
+  const input = document.getElementById(inputId);
   const file = input?.files?.[0];
   if(!file){ state.formError = 'Choose an image file first.'; renderApp(); return; }
   state.logoUploading = true;
   renderApp();
   try{
     const ext = file.name.split('.').pop();
-    const path = `logo-${Date.now()}.${ext}`;
+    const safeKey = contentKey.replace('.', '-');
+    const path = `${safeKey}-${Date.now()}.${ext}`;
     const { error: upErr } = await sb.storage.from('site-assets').upload(path, file, { upsert: true });
     if(upErr) throw upErr;
     const { data: urlData } = sb.storage.from('site-assets').getPublicUrl(path);
-    const { error: dbErr } = await sb.from('site_content').upsert([{ key:'brand.logo_url', value: urlData.publicUrl }], { onConflict:'key' });
+    const { error: dbErr } = await sb.from('site_content').upsert([{ key: contentKey, value: urlData.publicUrl }], { onConflict:'key' });
     if(dbErr) throw dbErr;
     await loadSiteContent();
     state.formError = null;
@@ -1701,13 +2073,327 @@ async function handleLogoUpload(){
   renderApp();
 }
 
-async function removeLogo(){
+async function removeImage(contentKey){
   try{
-    const { error } = await sb.from('site_content').upsert([{ key:'brand.logo_url', value:'' }], { onConflict:'key' });
+    const { error } = await sb.from('site_content').upsert([{ key: contentKey, value:'' }], { onConflict:'key' });
     if(error) throw error;
     await loadSiteContent();
   }catch(err){ state.formError = err.message; }
   renderApp();
+}
+
+/* =========================================================
+   RENDER: MY BOOKINGS
+   ========================================================= */
+async function loadMyBookings(){
+  const { data, error } = await sb.from('bookings').select('*').eq('user_id', state.user.id).order('created_at', { ascending:false });
+  if(error){ state.formError = error.message; return; }
+  state.myBookingsList = data || [];
+}
+
+function renderMyBookings(){
+  return `
+  ${topbar()}
+  <div class="shell">
+    <div class="page-head">
+      <div class="breadcrumb"><button onclick="go('menu')">Main Menu</button> / My Bookings</div>
+      <h1>My Bookings</h1>
+      <p>Every trip you have confirmed and received an invoice for.</p>
+    </div>
+    ${errorBanner()}
+    ${state.myBookingsList.length === 0 ? `<div class="panel empty-state"><div class="empty-state__title">No bookings yet</div>Book a trip from Recommend Destination or Explore Any Destination to see it here.</div>` : `
+    <div class="trip-list">
+      ${state.myBookingsList.map(b => `
+        <div class="pass fade-in">
+          <div class="pass__stub">
+            <span class="pass__stub-code">${b.destination.split(',')[0].slice(0,10).toUpperCase()}</span>
+            <div class="pass__stub-dots">${'<span></span>'.repeat(5)}</div>
+          </div>
+          <div class="perforation"></div>
+          <div class="pass__main">
+            <div>
+              <h3>${b.destination}</h3>
+              <div class="route">${b.travel_date} · ${b.duration} day(s) · ${b.travelers} traveler(s)</div>
+              <div class="hint" style="margin-top:6px;">Booked via ${b.provider} · <span class="badge badge--ok">${b.status}</span></div>
+            </div>
+            <div class="trip-stats">
+              <div><b>${b.estimated_cost != null ? fmt(b.estimated_cost) : 'N/A'}</b>Est. Cost</div>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>`}
+  </div>`;
+}
+
+/* =========================================================
+   RENDER: FAVORITE DESTINATIONS
+   ========================================================= */
+async function loadFavorites(){
+  const { data, error } = await sb.from('favorites').select('*, destinations(*)').eq('user_id', state.user.id);
+  if(error){ state.formError = error.message; return; }
+  state.favoritesList = data || [];
+}
+
+async function toggleFavorite(destinationId){
+  const existing = state.favoritesList.find(f => f.destination_id === destinationId);
+  try{
+    if(existing){
+      await sb.from('favorites').delete().eq('id', existing.id);
+    } else {
+      await sb.from('favorites').insert({ user_id: state.user.id, destination_id: destinationId });
+    }
+    await loadFavorites();
+  }catch(err){ state.formError = err.message; }
+  renderApp();
+}
+
+function isFavorited(destinationId){
+  return state.favoritesList.some(f => f.destination_id === destinationId);
+}
+
+function renderFavorites(){
+  return `
+  ${topbar()}
+  <div class="shell">
+    <div class="page-head">
+      <div class="breadcrumb"><button onclick="go('menu')">Main Menu</button> / Favorite Destinations</div>
+      <h1>Favorite Destinations</h1>
+      <p>Destinations you have saved from Recommend Destination for later.</p>
+    </div>
+    ${errorBanner()}
+    ${state.favoritesList.length === 0 ? `<div class="panel empty-state"><div class="empty-state__title">No favorites yet</div>Tap the heart on any destination in "Recommend Destination" to save it here.</div>` : `
+    <div class="result-grid">
+      ${state.favoritesList.map(f => {
+        const d = f.destinations;
+        if(!d) return '';
+        return `
+        <div class="pass result-card fade-in">
+          <div class="pass__stub">
+            <span class="pass__stub-code">${d.name.split(',')[0].slice(0,10).toUpperCase()}</span>
+            <div class="pass__stub-dots">${'<span></span>'.repeat(5)}</div>
+          </div>
+          <div class="perforation"></div>
+          <div class="pass__main">
+            <div>
+              <h3 style="color:var(--ink)">${d.name}</h3>
+              <div class="route">${d.attractions || ''}</div>
+              <div class="hint" style="margin-top:6px;">Avg. Rs.${d.avg_daily_budget}/day</div>
+            </div>
+            <button class="icon-btn icon-btn--danger" onclick="toggleFavorite(${d.id})">Remove</button>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`}
+  </div>`;
+}
+
+/* =========================================================
+   RENDER: TRIP INSPIRATION QUIZ
+   ========================================================= */
+const QUIZ_QUESTIONS = [
+  { key:'vibe', question:'What sounds like your ideal trip?', options:[
+    { label:'Beaches & relaxation', value:'beach' },
+    { label:'Mountains & adventure', value:'mountain' },
+    { label:'City lights & culture', value:'city' }
+  ]},
+  { key:'budget', question:'What is your rough daily budget?', options:[
+    { label:'Budget-friendly (under Rs.2500/day)', value:'low' },
+    { label:'Mid-range (Rs.2500 - 4500/day)', value:'mid' },
+    { label:'Splurge (Rs.4500+/day)', value:'high' }
+  ]},
+  { key:'company', question:'Who is this trip with?', options:[
+    { label:'Solo', value:'solo' },
+    { label:'Partner', value:'partner' },
+    { label:'Group / Family', value:'group' }
+  ]}
+];
+
+function renderQuiz(){
+  if(state.quizResult){
+    const r = state.quizResult;
+    return `
+    ${topbar()}
+    <div class="shell">
+      <div class="page-head">
+        <div class="breadcrumb"><button onclick="go('menu')">Main Menu</button> / Trip Inspiration Quiz</div>
+        <h1>Your Match</h1>
+        <p>Based on your answers, here is one destination worth looking at.</p>
+      </div>
+      <div class="pass fade-in" style="max-width:600px;">
+        <div class="pass__stub">
+          <span class="pass__stub-code">${r.name.split(',')[0].slice(0,10).toUpperCase()}</span>
+          <div class="pass__stub-dots">${'<span></span>'.repeat(5)}</div>
+        </div>
+        <div class="perforation"></div>
+        <div class="pass__main">
+          <div>
+            <h3 style="color:var(--ink)">${r.name}</h3>
+            <div class="route">${r.attractions}</div>
+            <div class="hint" style="margin-top:8px;">Avg. Rs.${r.avg_daily_budget}/day</div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn--dark" style="margin-top:18px;" onclick="restartQuiz()">Try Again</button>
+      <button class="btn btn--ghost" style="margin-top:18px; margin-left:10px;" onclick="go('recommend')">Get a Precise Score Instead →</button>
+    </div>`;
+  }
+
+  const q = QUIZ_QUESTIONS[state.quizStep];
+  return `
+  ${topbar()}
+  <div class="shell">
+    <div class="page-head">
+      <div class="breadcrumb"><button onclick="go('menu')">Main Menu</button> / Trip Inspiration Quiz</div>
+      <h1>Trip Inspiration Quiz</h1>
+      <p>Question ${state.quizStep + 1} of ${QUIZ_QUESTIONS.length}</p>
+    </div>
+    <div class="panel panel--taped" style="max-width:520px;">
+      <div class="section-title">${q.question}</div>
+      ${q.options.map(opt => `
+        <button class="btn btn--ghost btn--block" style="margin-bottom:10px; text-align:left;" onclick="answerQuiz('${q.key}','${opt.value}')">${opt.label}</button>
+      `).join('')}
+    </div>
+  </div>`;
+}
+
+function answerQuiz(key, value){
+  state.quizAnswers[key] = value;
+  if(state.quizStep < QUIZ_QUESTIONS.length - 1){
+    state.quizStep += 1;
+    renderApp();
+    return;
+  }
+  // Last question answered — pick a match from the loaded destinations
+  const vibeWords = { beach:'Beach', mountain:'Mountain', city:'City' };
+  const budgetRange = { low:[0,2500], mid:[2500,4500], high:[4500,999999] };
+  const [min, max] = budgetRange[state.quizAnswers.budget];
+
+  let candidates = state.destinations.filter(d => Number(d.avg_daily_budget) >= min && Number(d.avg_daily_budget) <= max);
+  if(candidates.length === 0) candidates = state.destinations;
+
+  // Prefer a destination whose attractions text hints at the chosen vibe
+  const vibeKeywords = {
+    beach: ['beach', 'coral', 'island', 'lake'],
+    mountain: ['mountain', 'valley', 'pass', 'trek', 'trekking', 'snow'],
+    city: ['museum', 'market', 'palace', 'tower', 'city', 'temple']
+  };
+  const keywords = vibeKeywords[state.quizAnswers.vibe] || [];
+  let matched = candidates.find(d => {
+    const text = (d.attractions || '').toLowerCase();
+    return keywords.some(k => text.includes(k));
+  });
+  if(!matched) matched = candidates[Math.floor(Math.random() * candidates.length)];
+
+  state.quizResult = matched;
+  renderApp();
+}
+
+function restartQuiz(){
+  state.quizStep = 0;
+  state.quizAnswers = {};
+  state.quizResult = null;
+  renderApp();
+}
+
+/* =========================================================
+   RENDER: PRIVACY POLICY / TERMS
+   (Plain, honest placeholder text — not legal advice. Have an
+   actual lawyer review this before treating it as a real policy
+   if this app collects data from the public at any real scale.)
+   ========================================================= */
+function legalShell(title, bodyHtml){
+  return `
+  ${topbar()}
+  <div class="shell">
+    <div class="page-head">
+      <div class="breadcrumb"><button onclick="go(state.user ? 'menu' : 'login')">${state.user ? 'Main Menu' : 'Home'}</button> / ${title}</div>
+      <h1>${title}</h1>
+    </div>
+    <div class="panel" style="max-width:760px; line-height:1.7; font-size:14.5px; color:var(--ink);">
+      ${bodyHtml}
+    </div>
+  </div>`;
+}
+
+function renderPrivacyPolicy(){
+  return legalShell('Privacy Policy', `
+    <p><em>Last updated: 2026. This is a plain-language summary, not a substitute for legal advice.</em></p>
+    <p><strong>What we collect:</strong> your name and email (for your account), the trips, destinations, transport, and expenses you enter, and bookings you confirm (destination, dates, traveler count).</p>
+    <p><strong>How we use it:</strong> to run your account and show you your own data, to email you booking invoices via our email provider (Brevo), and — if you choose to make a trip public — to show that specific trip to anyone with the link.</p>
+    <p><strong>What we don't do:</strong> we don't sell your data, we don't share it with advertisers, and we never see or store your password in plain readable form beyond what's needed to check it at login (handled by our authentication provider, Supabase).</p>
+    <p><strong>Third parties involved:</strong> Supabase (database & authentication), Vercel (hosting), Brevo (invoice emails), Open-Meteo (weather — no personal data sent). Booking links hand you off to real airlines/hotels/OTAs, who have their own separate privacy policies.</p>
+    <p><strong>Your control:</strong> you can delete any trip, expense, or booking yourself from within the app. To delete your account entirely, contact the site owner.</p>
+    <p>Questions about this policy? Reach out via the contact details on our LinkedIn/GitHub listing for this project.</p>
+  `);
+}
+
+function renderTerms(){
+  return legalShell('Terms of Service', `
+    <p><em>Last updated: 2026. Plain-language summary, not a substitute for legal advice.</em></p>
+    <p><strong>What this app is:</strong> a free trip-planning and budgeting tool. It does not sell flights, hotels, or any travel product itself — "booking" here means we save your plan and email you an itinerary, then hand you off to the real airline, hotel, or travel site to actually complete payment.</p>
+    <p><strong>No warranty:</strong> destination recommendations, weather, and cost estimates are provided as-is, for planning convenience only. Always confirm real prices, availability, and travel advisories directly with the airline/hotel/government source before you travel.</p>
+    <p><strong>Your responsibility:</strong> keep your login details private, and make sure any information you enter (dates, budgets, traveler names) is accurate — we're only as useful as the data you give us.</p>
+    <p><strong>Public trips:</strong> if you mark a trip "public" to share it, anyone with the link can view its destinations, transport, and dates — don't make sensitive trips public.</p>
+    <p><strong>Changes:</strong> this is an evolving personal/student project and these terms may change as the app does.</p>
+  `);
+}
+
+function renderAbout(){
+  const body = ct('about.body', 'CAY Trips is a free travel planning and budgeting tool built to solve a real problem: group trips are easy to dream up and hard to actually settle up afterward. We score destinations against your real budget, split group costs automatically, and connect you to real weather and real booking links, without ever taking a commission on what you book. When we suggest a destination, that suggestion is not shaped by what pays us, because nothing does. This project started as a student computer science submission and grew from there.');
+  return legalShell('About Us', `<p style="white-space:pre-line;">${body}</p>`);
+}
+
+function renderContact(){
+  const body = ct('contact.body', 'Have feedback, found a bug, or just want to say hello? We would love to hear from you, reach out via the contact details linked from our GitHub or LinkedIn listing for this project.');
+  return legalShell('Contact Us', `<p style="white-space:pre-line;">${body}</p>`);
+}
+
+function renderFounders(){
+  const founders = [1,2,3].map(n => ({
+    name: ct(`founder${n}.name`, `Founder ${n}`),
+    role: ct(`founder${n}.role`, 'Co-Founder'),
+    bio: ct(`founder${n}.bio`, 'Bio coming soon.'),
+    photo: ct(`founder${n}.photo_url`, '')
+  }));
+  return `
+  ${topbar()}
+  <div class="shell">
+    <div class="page-head">
+      <div class="breadcrumb"><button onclick="go(state.user ? 'menu' : 'login')">${state.user ? 'Main Menu' : 'Home'}</button> / The Founders</div>
+      <h1>The Founders</h1>
+      <p>${ct('founders.intro', 'The team behind CAY Trips.')}</p>
+    </div>
+    <div class="tile-grid">
+      ${founders.map(f => `
+        <div class="panel" style="text-align:center; animation:fadeIn .4s ease both;">
+          ${f.photo
+            ? `<img src="${f.photo}" alt="${f.name}" style="width:140px; height:140px; object-fit:cover; border-radius:50%; margin:0 auto 16px; display:block; border:3px solid var(--gold-soft);">`
+            : `<div style="width:140px; height:140px; border-radius:50%; margin:0 auto 16px; background:var(--paper-2); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:32px; color:var(--ink-soft);">${f.name.charAt(0)}</div>`}
+          <h3 style="color:var(--ink); margin-bottom:4px;">${f.name}</h3>
+          <div class="hint" style="color:var(--teal); font-weight:600; margin-bottom:10px;">${f.role}</div>
+          <p style="font-size:13.5px; color:var(--ink-soft); line-height:1.5;">${f.bio}</p>
+        </div>
+      `).join('')}
+    </div>
+  </div>`;
+}
+
+function siteFooter(){
+  return `
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">${ct('brand.name','CAY Trips')}</div>
+      <div class="site-footer__links">
+        <button onclick="go('about')">About</button>
+        <button onclick="go('founders')">The Founders</button>
+        <button onclick="go('contact')">Contact</button>
+        <button onclick="go('privacy')">Privacy</button>
+        <button onclick="go('terms')">Terms</button>
+      </div>
+      <div class="site-footer__copy">${ct('footer.note','Travel Itinerary Planner — backed by Supabase · your data really persists')}</div>
+    </div>
+  </footer>`;
 }
 
 /* =========================================================
@@ -1721,6 +2407,8 @@ function renderApp(){
   let html = '';
   switch(state.screen){
     case 'login': html = renderLogin(); break;
+    case 'forgotPassword': html = renderForgotPassword(); break;
+    case 'resetPassword': html = renderResetPassword(); break;
     case 'menu': html = renderMenu(); break;
     case 'trips': html = renderTrips(); break;
     case 'tripDetail': html = renderTripDetail(); break;
@@ -1730,9 +2418,18 @@ function renderApp(){
     case 'admin': html = renderAdmin(); break;
     case 'adminContent': html = renderAdminContent(); break;
     case 'exploreGlobal': html = renderExploreGlobal(); break;
+    case 'myBookings': html = renderMyBookings(); break;
+    case 'favorites': html = renderFavorites(); break;
+    case 'quiz': html = renderQuiz(); break;
+    case 'privacy': html = renderPrivacyPolicy(); break;
+    case 'terms': html = renderTerms(); break;
+    case 'about': html = renderAbout(); break;
+    case 'founders': html = renderFounders(); break;
+    case 'contact': html = renderContact(); break;
+    case 'sharedTrip': html = renderSharedTrip(); break;
     default: html = renderLogin();
   }
-  document.getElementById('app').innerHTML = html + (state.user ? `<div class="footer-note">${ct('footer.note','Travel Itinerary Planner — backed by Supabase · your data really persists')}</div>` : '');
+  document.getElementById('app').innerHTML = html + siteFooter();
   attachTiltEffect();
   if(state.screen === 'recommend') loadWeatherForResults();
   if(state.screen === 'exploreGlobal' && state.globalSelectedCity) loadGlobalWeather();
@@ -1801,6 +2498,28 @@ async function loadWeatherForResults(){
 }
 
 const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* =========================================================
+   THEME (light/dark) — persisted in localStorage where available.
+   This is a real deployed site (not just a chat preview), so
+   localStorage works normally here; wrapped in try/catch in case
+   it's blocked in any particular viewing context.
+   ========================================================= */
+function applyTheme(theme){
+  state.theme = theme;
+  document.body.setAttribute('data-theme', theme);
+  try{ localStorage.setItem('cay_theme', theme); }catch(err){ /* ignore if unavailable */ }
+}
+function toggleTheme(){
+  applyTheme(state.theme === 'light' ? 'dark' : 'light');
+  renderApp();
+}
+function loadSavedTheme(){
+  try{
+    const saved = localStorage.getItem('cay_theme');
+    if(saved === 'light' || saved === 'dark') applyTheme(saved);
+  }catch(err){ /* default stays dark */ }
+}
 function attachTiltEffect(){
   if(REDUCE_MOTION) return;
   document.querySelectorAll('.tile, .trip-card, .result-card').forEach(el=>{
@@ -1814,11 +2533,65 @@ function attachTiltEffect(){
   });
 }
 
-initAuth();
+/* =========================================================
+   PUBLIC SHARED TRIP VIEW — reached via ?share=TOKEN in the URL,
+   no login required, read-only, no expenses/budget shown.
+   ========================================================= */
+async function checkSharedTripView(){
+  const token = new URLSearchParams(window.location.search).get('share');
+  if(!token) return false;
+  try{
+    const { data, error } = await sb
+      .from('trips')
+      .select('*, trip_destinations(*), transport(*)')
+      .eq('share_token', token)
+      .eq('is_public', true)
+      .single();
+    if(error || !data) return false;
+    state.sharedTripView = data;
+    state.screen = 'sharedTrip';
+    recordHistory({ screen: 'sharedTrip' }, 'shared');
+    renderApp();
+    return true;
+  }catch(err){ return false; }
+}
+
+function renderSharedTrip(){
+  const trip = state.sharedTripView;
+  if(!trip) return `<div class="center-shell"><div class="panel">This shared trip link is invalid or is no longer public.</div></div>`;
+  return `
+  <div class="topbar"><div class="topbar__inner"><div class="brand"><span class="brand__mark">TIP · 083</span><span class="brand__name">${ct('brand.name','Travel Itinerary Planner')}</span></div><div class="topbar__meta"><span>Shared itinerary (read-only)</span></div></div></div>
+  <div class="shell">
+    <div class="page-head">
+      <div class="eyebrow">Shared Trip</div>
+      <h1>${trip.title}</h1>
+      <p>${trip.start_date} → ${trip.end_date} · ${trip.travelers} traveler(s)</p>
+    </div>
+    <div class="grid-2">
+      <div class="panel">
+        <div class="section-title">Destinations</div>
+        ${(trip.trip_destinations||[]).length ? trip.trip_destinations.map(d => `<div class="list-row"><div>${d.city}</div><div class="list-row__meta">${d.country}</div></div>`).join('') : `<div class="hint">No destinations listed.</div>`}
+      </div>
+      <div class="panel">
+        <div class="section-title">Transport</div>
+        ${(trip.transport||[]).length ? trip.transport.map(t => `<div class="list-row"><div>${t.mode}: ${t.from_place} → ${t.to_place}<div class="list-row__meta">${t.travel_date}</div></div></div>`).join('') : `<div class="hint">No transport listed.</div>`}
+      </div>
+    </div>
+    <p class="hint" style="margin-top:20px;"><em>Budget and expense details are kept private and are not shown on shared links.</em></p>
+    <a class="btn btn--primary" href="${window.location.origin}${window.location.pathname}" style="margin-top:10px; display:inline-block;">Plan your own trip on ${ct('brand.name','CAY Trips')} →</a>
+  </div>`;
+}
+
+async function startApp(){
+  loadSavedTheme();
+  if(!CONFIG_MISSING){
+    const wasShared = await checkSharedTripView();
+    if(wasShared) return;
+  }
+  initAuth();
+}
+
+startApp();
 </script>
-
-<!-- Vercel Web Analytics -->
-<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
-
 </body>
 </html>
