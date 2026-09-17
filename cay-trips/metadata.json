@@ -1,6 +1,0 @@
-{
-  "name": "CAY Trips",
-  "description": "Plan, budget, and book trips with AI-scored destination picks, automatic group cost splitting, real weather, and live booking links.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
